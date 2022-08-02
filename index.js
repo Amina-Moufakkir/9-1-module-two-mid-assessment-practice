@@ -66,11 +66,15 @@ function listAllCharacters(characters) {
  */
 
 function averageHeightOfAllCharacters(character) {
-  let avgHeight = 0;
-  characters.forEach((char) => {
-    avgHeight += Number(char.height);
-  });
-  return avgHeight / characters.length;
+  // let avgHeight = 0;
+  // characters.forEach((char) => {
+  //   avgHeight += Number(char.height);
+  // });
+  // return avgHeight / characters.length;
+  return characters.reduce(
+    (acc, char) => (acc += Number(char.height) / characters.length),
+    0
+  );
 }
 
 //UNCOMMENT THE LINES ONE AT A TIME BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
@@ -255,7 +259,7 @@ function getCharacterInMovie(characters, movie) {
  *  @returns {Array[]}} - returns an array of arrays.
  */
 
-function homeWorldValues() {}
+function homeWorldValues(characters) {}
 
 //UNCOMMENT THE LINE BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
 console.log(homeWorldValues(characters));
