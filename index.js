@@ -1,4 +1,4 @@
-const characters = require('./swapi');
+const characters = require("./swapi");
 // ****** DO NOT CHANGE THE LINE ABOVE
 // ****** IN THIS EXERCISE, TIME EACH CONSOLE.LOG ONE AT A TIME AND THEN COMMENT IT BACK OUT OR OTHER FUNCTIONS WILL NOT TEST CORRECTLY
 
@@ -41,7 +41,11 @@ const characters = require('./swapi');
  *
  */
 
-function listAllCharacters() {}
+function listAllCharacters(characters) {
+  if (!characters.length) throw "Characters array is empty.";
+
+  return characters.map(({ name }) => name);
+}
 
 //UNCOMMENT THE LINES ONE AT A TIME BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
 // console.log(listAllCharacters([]));
@@ -61,7 +65,13 @@ function listAllCharacters() {}
  * No example for this one. You should be able to find the average at this point
  */
 
-function averageHeightOfAllCharacters() {}
+function averageHeightOfAllCharacters(character) {
+  let avgHeight = 0;
+  characters.forEach((char) => {
+    avgHeight += Number(char.height);
+  });
+  return avgHeight / characters.length;
+}
 
 //UNCOMMENT THE LINES ONE AT A TIME BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
 //console.log(averageHeightOfAllCharacters(characters))
@@ -98,7 +108,10 @@ function averageHeightOfAllCharacters() {}
  *
  */
 
-function checkForEyeColor() {}
+function checkForEyeColor(characters, eyes) {
+  if (!characters.length) throw "No one has that eye color";
+  return characters.some((char) => char["eye_color"] === eyes);
+}
 
 //UNCOMMENT THE LINES ONE AT A TIME BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
 // console.log(checkForEyeColor([]));
@@ -150,7 +163,12 @@ function checkForEyeColor() {}
  *
  */
 
-function getAllCharactersCreatedAfterYear() {}
+function getAllCharactersCreatedAfterYear(characters, date) {
+  return characters.filter((char) => {
+    let characterCreatedDate = char.created.split("-");
+    return characterCreatedDate[0] >= date;
+  });
+}
 
 //UNCOMMENT THE LINES ONE AT A TIME BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
 // console.log(getAllCharactersCreatedAfterYear(characters, 2016));
@@ -205,7 +223,19 @@ function getAllCharactersCreatedAfterYear() {}
    }
  */
 
-function getCharacterInMovie() {}
+function getCharacterInMovie(characters, movie) {
+  if (!characters.length) throw "Characters array is empty.";
+
+  return characters.find((char) => {
+    for (let i = 0; i < char.films.length; i++) {
+      if (char.films[i] === movie) {
+        return char;
+      }
+    }
+  });
+}
+
+//
 
 //UNCOMMENT THE LINES ONE AT A TIME BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
 // console.log(getCharacterInMovie(characters, ''));
@@ -241,5 +271,5 @@ module.exports = {
   averageHeightOfAllCharacters,
   checkForEyeColor,
   getAllCharactersCreatedAfterYear,
-  getCharacterInMovie
+  getCharacterInMovie,
 };
